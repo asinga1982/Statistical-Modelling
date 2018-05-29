@@ -1,4 +1,9 @@
 # Modelling Poisson Distrinution using Multiple variables
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(ModelMetrics)
+library(stats4)
 
 #Read training data
 X <- read.csv("Train_Tickets.csv", header = T)
@@ -56,10 +61,10 @@ pred.ts <- (exp(coef(est)['theta0'] +
                   YY$age[idx]*coef(est)['theta7'] ))
 
 rmse(pred.ts, Y$Count[idx])
-#78.54
+#78.54594
 
-lm.fit <-  lm(log(Count)~age, data=Y[-idx,])
+lm.fit <-  lm(log(Count)~age+weekday, data=Y[-idx,])
 pred.lm <- predict(lm.fit, Y[idx,])
 rmse(exp(pred.lm), Y$Count[idx]) 
-#87.734
+#87.73424
 

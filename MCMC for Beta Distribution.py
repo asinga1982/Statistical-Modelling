@@ -29,7 +29,7 @@ def beta_mcmc(N_hops,a,b):
         ap = min(beta_s(next,a,b)/beta_s(cur,a,b),1) # Calculate the acceptance probability
         if random_coin(ap):
             cur = next
-    return states[-1000:] # Returns the last 1000 states of the chain
+    return states[-10000:] # Returns the last 10000 states of the chain
 
 import numpy as np
 import pylab as pl
@@ -55,7 +55,7 @@ def plot_beta(a, b):
         Lx.append(i)
         Ly.append(beta(a, b, i))
     pl.plot(Lx, Ly, label="Real Distribution: a="+str(a)+", b="+str(b))
-    pl.hist(beta_mcmc(100000,a,b),normed=True,bins =25, histtype='step',label="Simulated_MCMC: a="+str(a)+", b="+str(b))
+    pl.hist(beta_mcmc(1000000,a,b),normed=True,bins =25, histtype='step',label="Simulated_MCMC: a="+str(a)+", b="+str(b))
     pl.legend()
     pl.show()
 
